@@ -1,5 +1,13 @@
 requires-atopile: ^0.4.0
-ato-version: 0.4.1
+
+paths:
+  src: ./
+  layout: ./layouts
+  footprints: ./footprints
+
+builds:
+  default:
+    entry: main.ato:App
 
 package:
   identifier: eigenlucy/voltagewindowmonitor
@@ -10,12 +18,3 @@ package:
   summary: ATL431 based voltage window monitor
   license: GNU
   homepage: https://github.com/eigenlucy/voltagewindowmonitor
-
-paths:
-  src: ./
-  layout: ./layouts
-  footprints: ./footprints
-
-builds:
-  default:
-    entry: main.ato:App
