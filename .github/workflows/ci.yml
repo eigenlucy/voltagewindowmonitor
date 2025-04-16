@@ -28,7 +28,7 @@ jobs:
         with:
           # Either: derive the version from a config file (e.g., pyproject.toml or ato.yaml)
           # [Recommended and default if neither are provided]
-          ato-config: "ato.yaml"
+          # ato-config: "ato.yaml"
           # Or: Specify the atopile version directly
           atopile-version: "0.4.1"
 
