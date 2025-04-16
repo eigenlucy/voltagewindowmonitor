@@ -1,4 +1,14 @@
-ato-version: 0.4.1
+requires-atopile: ^0.4.0
+
+package:
+  identifier: eigenlucy/voltagewindowmonitor
+  repository: https://github.com/eigenlucy/voltagewindowmonitor
+  authors:
+    - name: Lucy Moglia
+      email: eigenlucy@proton.me
+  summary: ATL431 based voltage window monitor
+  license: GNU
+  homepage: https://github.com/eigenlucy/voltagewindowmonitor
 
 paths:
   src: ./
