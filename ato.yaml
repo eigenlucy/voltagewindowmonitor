@@ -1,4 +1,5 @@
 requires-atopile: ^0.4.0
+ato-version: 0.4.1
 
 package:
   identifier: eigenlucy/voltagewindowmonitor
