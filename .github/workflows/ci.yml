@@ -33,7 +33,7 @@ jobs:
           atopile-version: "0.4.1"
 
           # Version of the package to publish. If empty, the version is expected in the ato.yaml file.
-          package-version: "from-tag"
+          package-version: "0.1"
 
           # Skip publishing if the version already exists. If "false", the action will fail if the version already exists.
           # This is useful if you want to publish from the `main` branch or whenever the `package.version` is bumped.
