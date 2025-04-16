@@ -7,6 +7,11 @@ from "yongyutai_yled0402g.ato" import YONGYUTAI_YLED0402G
 ATL431 Based Window Voltage Monitor
 See details here: https://www.ti.com/lit/ds/symlink/atl431li.pdf?ts=1744777182166
 See figure 37 for schematic ref
+
+To Do:
+- Iq solver with Ika 
+- Automatic cutoff solver
+- Add spice model
 """
 module App:
     Vin = new ElectricPower
