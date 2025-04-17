@@ -1,0 +1,36 @@
+# divider.ato
+import Resistor from std.ato
+import ElectricPower from std.ato
+
+module VoltageDivider:
+    # --- Interface ---
+    signal Vin # Input voltage source
+    signal Vout # Output voltage (divider midpoint)
+    signal Vgnd # Ground reference
+
+    # --- Parameters ---
+    param Vout_target # Desired voltage at Vout when Vin is at the threshold
+    param Vin_at_threshold # Input voltage at which Vout should be Vout_target
+    param Idiv_target # Target current through the divider at threshold
+
+    # --- Components ---
+    R1 = new Resistor
+    R2 = new Resistor
+
+    # --- Connections ---
+    R1.p1 ~ Vin
+    R1.p2 ~ Vout
+    R2.p1 ~ Vout
+    R2.p2 ~ Vgnd
+
+    # --- Assertions for Calculation ---
+    # Ensure target voltage is achievable
+    assert Vin_at_threshold > Vout_target, "Threshold voltage must be lower than input voltage at threshold"
+
+    # Calculate resistors based on target voltage and divider current
+    assert R2.resistance == Vout_target / Idiv_target view R2_calc
+    assert R1.resistance == (Vin_at_threshold - Vout_target) / Idiv_target view R1_calc
+
+    # Optional: Expose calculated resistances
+    signal R1_resistance = R1.resistance
+    signal R2_resistance = R2.resistance

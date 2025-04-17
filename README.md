@@ -2,6 +2,46 @@
 
 This package defines an atopile component for a voltage window monitor based on the ATL431LI shunt regulator.
 
+See the [ATL431 Datasheet System Examples (Figure 37)](https://www.ti.com/lit/ds/symlink/atl431li.pdf?ts=1744777182166) for more details
+
+## Block Diagram
+
+```
+                    +--------+
+Vin -----------+---|  R1A   |---+
+               |   +--------+   |
+               |                |
+               |   +--------+   |      +--------+
+               +---|  R1B   |---+------|  REF   |
+               |   +--------+   |      |        |
+               |                +------|   A    | ATL431 #1
+               |   +--------+          |        | (High Threshold)
+               +---|  R3    |----------|   K    |
+               |   +--------+   |      +--------+
+               |                |          |
+               |                |          |
+               |                |      +--------+
+               |                |      |  OUT   |--------
+               |                |      +--------+
+               |                |          |
+               |                |          |
+               |   +--------+   |      +--------+
+               |   |  R2A   |---+      |  REF   |
+               |   +--------+          |        |
+               |                +------|   A    | ATL431 #2
+               |   +--------+  |       |        | (Low Threshold)
+               +---|  R2B   |--+ +-----|   K    |
+               |   +--------+    |      +--------+
+               |                 |         |
+               |   +--------+    |         |
+               +---|  R4    |----+         |
+                   +--------+              |
+                        |                  |
+GND --------------------|------------------|
+
+                                        OUT = (HIGH in window, LOW outside)
+```
+
 ## Threshold Equations
 
 The high and low voltage thresholds are set using external resistor dividers connected to the REF pin of two separate ATL431LI devices (or similar comparators with an internal reference). The threshold is triggered when the voltage at the REF pin equals the internal reference voltage (`Vref`, typically 2.5V).
@@ -22,66 +62,6 @@ The high and low voltage thresholds are set using external resistor dividers con
 
   Where R1B and R2B form the voltage divider for the low threshold comparator.
 
-## Conceptual Diagram (JSON Representation)
+## Todo
 
-The following JSON data represents the conceptual blocks and connections for the voltage window monitor circuit:
-
-```json
-{
-  "diagram_type": "conceptual_block",
-  "title": "Voltage Window Monitor using ATL431LI",
-  "components": [
-    { "id": "vin", "label": "V_IN", "type": "input_voltage" },
-    {
-      "id": "divider_high",
-      "label": "High Threshold Divider (R1A, R2A)",
-      "type": "resistor_divider"
-    },
-    {
-      "id": "comparator_high",
-      "label": "ATL431LI (High Threshold)",
-      "type": "comparator_reference"
-    },
-    {
-      "id": "divider_low",
-      "label": "Low Threshold Divider (R1B, R2B)",
-      "type": "resistor_divider"
-    },
-    {
-      "id": "comparator_low",
-      "label": "ATL431LI (Low Threshold)",
-      "type": "comparator_reference"
-    },
-    {
-      "id": "output_high",
-      "label": "High Threshold Output",
-      "type": "output_signal"
-    },
-    {
-      "id": "output_low",
-      "label": "Low Threshold Output",
-      "type": "output_signal"
-    }
-  ],
-  "connections": [
-    { "from": "vin", "to": "divider_high", "label": "Input" },
-    { "from": "vin", "to": "divider_low", "label": "Input" },
-    {
-      "from": "divider_high",
-      "to": "comparator_high",
-      "label": "REF Pin Input"
-    },
-    { "from": "divider_low", "to": "comparator_low", "label": "REF Pin Input" },
-    {
-      "from": "comparator_high",
-      "to": "output_high",
-      "label": "Cathode Output"
-    },
-    { "from": "comparator_low", "to": "output_low", "label": "Cathode Output" }
-  ],
-  "notes": [
-    "Each ATL431LI compares its REF pin input against its internal Vref (~2.5V).",
-    "The Cathode output state changes when the REF pin voltage crosses Vref."
-  ]
-}
-```
+- Automatically solve resistor values with assertions given Vin, Ika_min, Iref_min, etc

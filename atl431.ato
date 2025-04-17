@@ -6,7 +6,11 @@ component ATL431:
     datasheet_url = "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302221801_Texas-Instruments-ATL431LIBQDBZR_C701720.pdf"
     designator_prefix = "U"
 
-    # pins
-    signal A ~ pin 3
-    signal K ~ pin 1
-    signal REF ~ pin 2
+    # --- Parameters ---
+    # From datasheet: ATL431LI has Vref typically 2.495V
+    Vref = 2.495 V +/- 1%
+
+    # --- Pins ---
+    signal A ~ pin 3 # Anode (usually tied to GND)
+    signal K ~ pin 1 # Cathode
+    signal REF ~ pin 2 # Reference input
