@@ -28,6 +28,7 @@ graph TD
         I --> J
         J --> K[Final Output (High if Vin is within window, Low otherwise)]
     end
+```
 
 ## Threshold Equations
 
