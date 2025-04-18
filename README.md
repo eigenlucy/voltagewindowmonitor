@@ -13,14 +13,14 @@ graph TD
         subgraph "High Threshold Path"
             direction LR
             B --> D[Voltage Divider R1A, R2A]
-            D --> E[Comparator 1 (ATL431)]
+            D --> E[Reg1]
             E -- Compare with Vref --> F{Vin > V_high?}
         end
 
         subgraph "Low Threshold Path"
             direction LR
             C --> G[Voltage Divider R1B, R2B]
-            G --> H[Comparator 2 (ATL431)]
+            G --> H[Reg2]
             H -- Compare with Vref --> I{Vin < V_low?}
         end
 
