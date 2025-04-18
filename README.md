@@ -7,28 +7,27 @@ See the [ATL431 Datasheet System Examples (Figure 37)](https://www.ti.com/lit/ds
 ```mermaid
 graph TD
     subgraph "Voltage Window Monitor Concept (from README)"
-        A[Input Voltage Vin] --> B{High Threshold Check};
-        A --> C{Low Threshold Check};
+        A[Input Voltage Vin] --> B{High Threshold Check}
+        A --> C{Low Threshold Check}
 
         subgraph "High Threshold Path"
             direction LR
-            B --> D[Voltage Divider R1A, R2A];
-            D --> E[Comparator 1 (ATL431)];
-            E -- Compare with Vref --> F{Vin > V_high?};
+            B --> D[Voltage Divider R1A, R2A]
+            D --> E[Comparator 1 (ATL431)]
+            E -- Compare with Vref --> F{Vin > V_high?}
         end
 
         subgraph "Low Threshold Path"
             direction LR
-            C --> G[Voltage Divider R1B, R2B];
-            G --> H[Comparator 2 (ATL431)];
-            H -- Compare with Vref --> I{Vin < V_low?};
+            C --> G[Voltage Divider R1B, R2B]
+            G --> H[Comparator 2 (ATL431)]
+            H -- Compare with Vref --> I{Vin < V_low?}
         end
 
-        F --> J{Output Logic};
-        I --> J;
-        J --> K[Final Output (High if Vin is within window, Low otherwise)];
+        F --> J{Output Logic}
+        I --> J
+        J --> K[Final Output (High if Vin is within window, Low otherwise)]
     end
-```
 
 ## Threshold Equations
 
